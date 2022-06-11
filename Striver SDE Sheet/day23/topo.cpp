@@ -10,13 +10,6 @@
 // When we empty such a stack in a vector then all nodes will occur before its dependancies 
 
 
-//  Detect Cycle in Directed Graph 
-
-// DFS Approach 
-// There exists a cycle if there is back edge in graph 
-// Back edge is edge which connects 2 vertex which are present in same recursion stack 
-// Time O(V+E)                                 Space O(V+E) 
-
 // BFS Approach (Kahns Based Algo)
 // Create indegree array where indegree of a vertex is no of vertex pointing towards a given vertex
 // Then put all elements wityh indegree 0 in queue and do Normal BFS 
