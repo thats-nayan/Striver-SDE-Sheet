@@ -1,4 +1,3 @@
-// Linked Lists
 
 #include <iostream>
 using namespace std;
@@ -32,48 +31,41 @@ Node *insert_end(Node *head, int x)
     curr->next = temp;
     return head;
 }
-// Method 
-// Maintain 3 pointers prev,curr and next change link of curr from next to prev and move curr to next
-//  and prev to curr        
-//  Time O(N)           Space O(1)
-
-// Iterative Method 
-Node *reverse_LL(Node *head)
+Node *remove_node(Node *head,int d)
 {
-    Node *prev = NULL,*curr = head,*n;
+    Node *curr = head;
+    int k = d+1;
+    while (curr != NULL && k--)
+    curr = curr->next;
+    if(k == 1)
+    {
+        Node *temp = head->next;
+        delete head;
+        return temp;
+    }
+    // cout<<"curr = "<<curr->data<<" k = "<<k<<"\n";
+    Node *slow = head;
     while(curr != NULL)
     {
-        n = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = n;
+        curr = curr->next;
+        slow = slow->next;
     }
-    return prev;
-}
-// Recursive Method 
-Node *reverse_rec(Node *head,Node *prev)
-{
-    if(head == NULL)
-    return prev;
-    else
-    {
-        Node *n = head->next;
-        head->next = prev;
-        return reverse_rec(n,head);
-    }
+    Node *temp = slow->next;
+    slow->next = slow->next->next;
+    delete temp;
+    return head;
 }
 int main()
 {
-    int N,x;
-    cin>>N;
+    int N,d,x;
+    cin>>N>>d;
     Node *head = NULL;
     while(N--)
     {
         cin>>x;
         head = insert_end(head,x);
     }
-    // head = reverse_LL(head);
-    head = reverse_rec(head,NULL);
+    head = remove_node(head,d);
     print_LL(head);
     return 0;
 }
